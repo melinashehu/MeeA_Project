@@ -1,0 +1,202 @@
+:root {
+    --primary-colour: #58a390;
+    --container-background-color: #fff;
+    --text-colour: #ffffff;
+    --body-colour: #f0f4f8;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background: var(--body-colour);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: -20px 0 20px;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+    color: var(--primary-colour);
+    text-align: center;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.container {
+    display: flex;
+    width: 800px;
+    height: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--container-background-color);
+}
+
+
+.form-container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+
+.social-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 20px;
+    background: transparent;
+    border: 2px solid #d9d7dc;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    border-radius: 20px;
+    color: #000;
+}
+
+.social-container a:hover {
+    background-color: #d0dbff;
+}
+
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 12px;
+    width: 50%;
+    align-items: center;
+    background-color: #58a390;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin: 10px auto;
+    display:block;
+}
+
+button:hover {
+    background-color: #58a390;
+}
+
+
+.overlay-panel {
+    flex: 1;
+    padding: 40px;
+    background-color: #58a390;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.overlay-panel h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color:#f4f4f4;
+}
+
+.overlay-panel p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.overlay-panel button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.overlay-panel button:hover {
+    background-color: white;
+    color: #58a390;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.forgot-password {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    color: #58a390;
+}
+
+.form-container h2{
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+button {
+    background-color: var(--primary-colour);
+    color: var(--text-colour);
+    border: none;
+    padding: 12px 45px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+button.ghost {
+    background-color: transparent;
+    border: 1px solid var(--text-colour);
+    color: var(--text-colour);
+}

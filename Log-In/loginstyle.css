@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
+/* Colors */
+/* Krijimi i variablave te cilat do na ndihmojne per te ndryshuar ngjyrat me nje ndryshim te vetem pa modifikuar gjithe kodin */
+:root {
+    --primary-colour: #58a390;
+    --container-background-color: #fff;
+    --text-colour: #fff;
+    --body-colour: #ffffff;
+}
+
+/* Baza CSS */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+.overlay-panel .logo {
+    position: relative; /* Logoja është brenda panelit */
+    top: -90px; /* Rregullo hapësirën për ta vendosur më sipër */
+    margin-bottom: 20px; /* Hapësirë mes logos dhe titullit */
+    display: flex;
+    justify-content: center;
+}
+
+.overlay-panel .logo img {
+    width: 90px; /* Mund të ndryshohet për ta bërë më të madhe apo më të vogël */
+    height: auto;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+    background: var(--body-colour);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: -20px 0 20px;
+}
+h1 {
+    font-weight: bold;
+    margin: 0;
+    color:#f4f4f4
+}
+.form-container h1 {
+    color: var(--primary-colour);
+}
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+/* Ketu stilizohet kuadrati kryesor */
+.container {
+    vertical-align: center;
+    background-color: var(--container-background-color);
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    /* siguron qe animacioni mos te dal nga kutia */
+    overflow: hidden;
+    width: 750px;
+    max-width: 100%;
+    min-height: 500px;
+}
+.form-container form {
+    background: var(--container-background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+.social-container {
+    margin: 20px 0;
+}
+.social-container a {
+    border: 1px solid #ddd;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin: 0 5px;
+    color: #333;
+}
+.social-container a:hover {
+    background: var(--primary-colour);
+    color: var(--text-colour);
+}
+.form-container input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 10px;
+}
+button {
+    background-color: var(--primary-colour);
+    color: var(--text-colour);
+    border: none;
+    padding: 12px 45px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+button.ghost {
+    background-color: transparent;
+    border: 1px solid var(--text-colour);
+    color: var(--text-colour);
+}
+/* efekt animacioni dhe butonat kur klilohen me shkalle 0.95 */
+button:active {
+    transform: scale(0.95);
+}
+.form-container {
+    /* formulari vedoset brenda kutise kryesore */
+    position: absolute;
+    top: 0;
+    height: 100%;
+    /* ben kalimin ndermjet paneleve me te bute te animuar */
+    transition: all 0.3s ease-in-out;
+}
+/* butonat do te perfshihen ne kutine qendrore */
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    /* ben q t shfaqet siper sign up container */
+    z-index: 2;
+}
+.sign-up-container {
+    /* fillimisht kjo nuk duket ky buton, por ur shfaqet right panel active leviz kjo */
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+}
+/* overlay sianimacionin */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+.overlay {
+    /* shiriti qe mban ngjtren kryseore dhe shtrihet dyfish ne gjeresi 200% */
+    background: var(--primary-colour);
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    /* krijije efektin rreshqites */
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transition: transform 0.6s ease-in-out;
+}
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+.overlay-left {
+    transform: translateX(-20%);
+}
+/* ketu kemi dy panele tekstesh njeri per miresardhje njeri pr rregjistrim  */
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+/* ketu behet levizja e panelit djathtas */
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.button-animated{
+    animation: button-bounce 0.6s ease-in-out;
+}
+
+.google-login{
+    display: inline-flex;
+    align-items: center;
+    width: 250px;
+    height: 50px
+}
+.google-login a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 400%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #d9d7dc;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    border-radius: 20px;
+    color: #000;
+    text-decoration: none;
+}
+
+.google-login i{
+    margin-right: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.google-login span{
+    font-size: 14px;
+    vertical-align: middle;
+}
+.login-options {
+    display: flex; /* Elementet në një rresht */
+    justify-content: space-between; /* Hapësirë mes checkbox-it dhe linkut */
+    align-items: center; /* Qendërzim vertikal */
+    width: 100%; /* Përputh gjerësinë me elementin prind */
+    margin: 10px 0;
+}
+
+.remember-me {
+    display: flex; /* Vendos checkbox-in dhe tekstin në një rresht */
+    align-items: center; /* Teksti qendërzohet me checkbox-in */
+    gap: 5px; /* Hapësirë mes checkbox-it dhe tekstit */
+    font-size: 12px;
+}
+
+.forgot-password {
+    font-size: 12px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    color: #286bb4;
+}
+
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #444;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#toast.error {
+    background-color: #e74c3c;
+}
+
+#toast.success {
+    background-color: #2ecc71;
+}

@@ -1,0 +1,128 @@
+Me poshte paraqiten query-t ne mysql per gjithe tabelat e shtuara ne databazen: 'programimweb':
+
+//Krijimi i databazes qe do mbaje tabelat: CREATE DATABASE programimweb;
+
+1. Krijimi i tabeles se user-ave:
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL DEFAULT 'user',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    verified_email VARCHAR(1) NULL DEFAULT '0',
+    verification_code INT(6) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (email)
+);
+
+2. Krijimi i tabeles se fotove te profilit:
+CREATE table profile_pictures (
+id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT(11) NOT NULL UNIQUE,
+picture_status INT(11) NOT NULL,
+image_path VARCHAR(255) NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+3. Krijimi i tabeles se informacionit about:
+CREATE TABLE user_about_information (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL UNIQUE,
+    about_text TEXT NULL DEFAULT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+4. Krijimi i tabeles se link-eve te user-it:
+CREATE TABLE user_contact_links ( 
+id INT AUTO_INCREMENT PRIMARY KEY, 
+user_id INT NOT NULL UNIQUE, 
+linkedin_username VARCHAR(255) DEFAULT NULL UNIQUE, 
+github_username VARCHAR(255) DEFAULT NULL UNIQUE, 
+mail_username VARCHAR(255) DEFAULT NULL UNIQUE, 
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
+);
+
+5. Krijimi i tabeles se preferences se display mode te user-it:
+CREATE TABLE user_preferences (
+id INT AUTO_INCREMENT PRIMARY KEY,
+user_id INT NOT NULL UNIQUE,
+theme_mode VARCHAR(10) NOT NULL CHECK (theme_mode IN ('light', 'dark')),
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+6. Krijimi i tabeles se postimeve:
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    user_id INT NOT NULL, 
+    type ENUM('text', 'image', 'video', 'link') NOT NULL, 
+    title TEXT DEFAULT NULL, 
+    content TEXT DEFAULT NULL, 
+    media_path VARCHAR(255) DEFAULT NULL, 
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
+);
+
+7. Krijimi i tabeles se komenteve:
+CREATE TABLE comments (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    post_id INT NOT NULL, 
+    user_id INT NOT NULL, 
+    type ENUM('text', 'image', 'video', 'link') NOT NULL, 
+    content TEXT DEFAULT NULL, 
+    media_path VARCHAR(255) DEFAULT NULL, 
+    parent_id INT DEFAULT NULL, 
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE, 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, 
+    FOREIGN KEY (parent_id) REFERENCES comments(id) ON DELETE CASCADE 
+);
+
+8. Krijimi i tabeles se like-ve te postimeve:
+CREATE TABLE post_likes (
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    post_id INT(11) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    UNIQUE (user_id, post_id) 
+);
+
+9. Krijimi i tabeles se like-ve te komenteve:
+
+CREATE TABLE comments_likes (
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    comment_id INT(11) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    UNIQUE (user_id, comment_id) 
+);
+
+10. Krijimi i tabeles se tentativave te deshtuara te logimit:
+
+CREATE TABLE failed_logins (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    failed_attempts INT(11) NOT NULL DEFAULT 0,
+    lockout_time DATETIME DEFAULT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    attempted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+11. Krijimi i tabeles se grupeve:
+
+CREATE TABLE groups (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    emri_grupit VARCHAR(255) NOT NULL,
+    anetaret TEXT NOT NULL,
+    lloji VARCHAR(50) NOT NULL,
+    privatesia VARCHAR(50) NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
